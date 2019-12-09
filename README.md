@@ -1,4 +1,4 @@
 # LB150
 
 Quelle Anfangsprojekt:
-https://www.javatpoint.com/spring-mvc-crud-example
+https://howtodoinjava.com/spring-restful/spring-rest-crud-jpa-example/
