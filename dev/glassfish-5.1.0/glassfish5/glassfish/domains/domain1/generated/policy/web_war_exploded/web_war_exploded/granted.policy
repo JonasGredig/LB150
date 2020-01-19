@@ -1,0 +1,16 @@
+/* AUTOMATICALLY GENERATED ON Fri Jan 17 15:07:42 CET 2020*/
+/* DO NOT EDIT */
+
+grant {
+  permission javax.security.jacc.WebResourcePermission "/";
+  permission javax.security.jacc.WebUserDataPermission "/";
+};
+
+grant      principal * * {
+  permission javax.security.jacc.WebRoleRefPermission "jsp", "**";
+  permission javax.security.jacc.WebRoleRefPermission "", "**";
+  permission javax.security.jacc.WebRoleRefPermission "com.csg.cs.cro.bankingsoftware.endpoint.BankingsoftwareApplication", "**";
+  permission javax.security.jacc.WebRoleRefPermission "Jersey REST Service", "**";
+  permission javax.security.jacc.WebRoleRefPermission "default", "**";
+};
+
