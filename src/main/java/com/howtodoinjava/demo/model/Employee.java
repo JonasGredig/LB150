@@ -29,6 +29,8 @@ public class Employee implements Serializable {
     @Email(message = "Email must be a valid email address")
     private String email;
 
+    private int departmentId;
+
     private int votes;
 
     public Employee() {
@@ -74,9 +76,23 @@ public class Employee implements Serializable {
         this.votes = votes;
     }
 
+    public int getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(int departmentId) {
+        this.departmentId = departmentId;
+    }
+
     @Override
     public String toString() {
-        return "EmployeeVO [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-                + "]";
+        return "Employee{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", departmentId=" + departmentId +
+                ", votes=" + votes +
+                '}';
     }
 }

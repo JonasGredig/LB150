@@ -69,6 +69,8 @@ public class EmployeeRESTController {
             employee.setFirstName(newEmployee.getFirstName());
             employee.setLastName(newEmployee.getLastName());
             employee.setEmail(newEmployee.getEmail());
+            employee.setDepartmentId(newEmployee.getDepartmentId());
+            employee.setVotes(newEmployee.getVotes());
             return repository.save(employee);
         }).orElseGet(() -> {
             newEmployee.setId(id);
