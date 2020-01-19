@@ -22,55 +22,62 @@ import com.howtodoinjava.demo.model.Employee;
 import com.howtodoinjava.demo.repository.EmployeeRepository;
 
 @RestController
-@RequestMapping(value = "/employee-management", produces = { MediaType.APPLICATION_JSON_VALUE })
+@RequestMapping(value = "/employee-management", produces = {MediaType.APPLICATION_JSON_VALUE})
 @Validated
 public class EmployeeRESTController {
-	@Autowired
-	private EmployeeRepository repository;
+    @Autowired
+    private EmployeeRepository repository;
 
-	public EmployeeRepository getRepository() {
-		return repository;
-	}
+    public EmployeeRepository getRepository() {
+        return repository;
+    }
 
-	public void setRepository(EmployeeRepository repository) {
-		this.repository = repository;
-	}
+    public void setRepository(EmployeeRepository repository) {
+        this.repository = repository;
+    }
 
-	@GetMapping(value = "/employees")
-	public List<Employee> getAllEmployees() {
-		return repository.findAll();
-	}
+    @GetMapping(value = "/employees")
+    public List<Employee> getAllEmployees() {
+        return repository.findAll();
+    }
 
-	@PostMapping("/employees")
-	Employee createOrSaveEmployee(@RequestBody Employee newEmployee) {
-		return repository.save(newEmployee);
-	}
-	
-	@GetMapping("/employees/{id}")
-	Employee getEmployeeById(@PathVariable 
-							 @Min(value = 1, message = "id must be greater than or equal to 1") 
-							 @Max(value = 1000, message = "id must be lower than or equal to 1000") Long id)
-	{
-	    return repository.findById(id)
-	            .orElseThrow(() -> new RecordNotFoundException("Employee id '" + id + "' does no exist"));
-	}
 
-	@PutMapping("/employees/{id}")
-	Employee updateEmployee(@RequestBody Employee newEmployee, @PathVariable Long id) {
+    @PostMapping("/employees")
+    Employee createOrSaveEmployee(@RequestBody Employee newEmployee) {
+        return repository.save(newEmployee);
+    }
 
-		return repository.findById(id).map(employee -> {
-			employee.setFirstName(newEmployee.getFirstName());
-			employee.setLastName(newEmployee.getLastName());
-			employee.setEmail(newEmployee.getEmail());
-			return repository.save(employee);
-		}).orElseGet(() -> {
-			newEmployee.setId(id);
-			return repository.save(newEmployee);
-		});
-	}
+    @GetMapping("/employee/vote/{id}")
+    Employee voteEmployee(@PathVariable int id) {
+        Employee employee = getEmployeeById(id + 0l);
+        employee.setVotes(employee.getVotes() + 1);
+        return repository.save(employee);
+    }
 
-	@DeleteMapping("/employees/{id}")
-	void deleteEmployee(@PathVariable Long id) {
-		repository.deleteById(id);
-	}
+    @GetMapping("/employees/{id}")
+    Employee getEmployeeById(@PathVariable
+                             @Min(value = 1, message = "id must be greater than or equal to 1")
+                             @Max(value = 1000, message = "id must be lower than or equal to 1000") Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new RecordNotFoundException("Employee id '" + id + "' does no exist"));
+    }
+
+    @PutMapping("/employees/{id}")
+    Employee updateEmployee(@RequestBody Employee newEmployee, @PathVariable Long id) {
+
+        return repository.findById(id).map(employee -> {
+            employee.setFirstName(newEmployee.getFirstName());
+            employee.setLastName(newEmployee.getLastName());
+            employee.setEmail(newEmployee.getEmail());
+            return repository.save(employee);
+        }).orElseGet(() -> {
+            newEmployee.setId(id);
+            return repository.save(newEmployee);
+        });
+    }
+
+    @DeleteMapping("/employees/{id}")
+    void deleteEmployee(@PathVariable Long id) {
+        repository.deleteById(id);
+    }
 }
