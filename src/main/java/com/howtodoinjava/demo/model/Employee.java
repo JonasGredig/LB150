@@ -13,60 +13,70 @@ import javax.validation.constraints.NotEmpty;
 @Entity
 @Table(name = "tbl_employee")
 public class Employee implements Serializable {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
-	@NotEmpty(message = "First name must not be empty")
-	private String firstName;
-	
-	@NotEmpty(message = "Last name must not be empty")
-	private String lastName;
-	
-	@NotEmpty(message = "Email must not be empty")
-	@Email(message = "Email must be a valid email address")
-	private String email;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	public Employee() {
-	}
+    @NotEmpty(message = "First name must not be empty")
+    private String firstName;
 
-	public Long getId() {
-		return id;
-	}
+    @NotEmpty(message = "Last name must not be empty")
+    private String lastName;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    @NotEmpty(message = "Email must not be empty")
+    @Email(message = "Email must be a valid email address")
+    private String email;
 
-	public String getFirstName() {
-		return firstName;
-	}
+    private int votes;
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+    public Employee() {
+    }
 
-	public String getLastName() {
-		return lastName;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public String getFirstName() {
+        return firstName;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-	@Override
-	public String toString() {
-		return "EmployeeVO [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-				+ "]";
-	}
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public int getVotes() {
+        return votes;
+    }
+
+    public void setVotes(int votes) {
+        this.votes = votes;
+    }
+
+    @Override
+    public String toString() {
+        return "EmployeeVO [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
+                + "]";
+    }
 }
